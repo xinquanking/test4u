@@ -1,0 +1,19 @@
+@TITLE: test app upgrade
+
+@SETUP
+upgradeApp
+assert pass
+startApp
+
+@VALIDATION
+checkCrash
+sleep 5
+check id/tut_introduce_txt0 What's New in this Update?
+assert pass
+check id/next_button_view_id Go to my Homescreen
+assert pass
+testInstalledAppVersion
+
+@TEARDOWN
+keypress KEYCODE_HOME
+

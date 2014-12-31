@@ -1,0 +1,12 @@
+@TITLE: Verify if mobie crash or throw any exception in monkey test
+
+@SETUP
+stopApp
+
+@VALIDATION
+startApp
+
+testMonkeyTest
+
+@TEARDOWN
+keypress KEYCODE_HOME
