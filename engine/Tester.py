@@ -12,14 +12,13 @@ from os import path, remove, getcwd, mkdir, listdir
 from TestServer import TestServer
 from AppTestEngine import AppTestEngine, BUILD_VERSION, CLIENT_VERSION_PREFIX
 from TestUtil import printLog, createLogger, TestStatus, TestSuite, H_LINE, \
-					TC_SUBDIR, SNAPSHOT_SUBDIR, \
+					TC_SUBDIR, TS_SUBDIR, SNAPSHOT_SUBDIR, \
 					MAIL_SERVER_ADDRESS, MAIL_SENDER_ADDRESS, MAIL_SENDER_PASSWORD, MAIL_ADMIN_ADDRESS, \
 					MONKEYLOG_FILE, TESTER_DEBUG_LOG_FILE, \
-					APPLOG_FILE, ADBLOG_FILE, DEFAULT_TEST_SUITE, CONFIG_FILE
+					APPLOG_FILE, ADBLOG_FILE, DEFAULT_TEST_SUITE, CONFIG_FILE, \
+					THREAD_WAIT_INTERVAL
 from MailUtil import send_mail
 
-## configurables
-THREAD_WAIT_INTERVAL=10
 
 class Tester(object):
 	'''
@@ -49,17 +48,20 @@ class Tester(object):
 		self.end_time=None
 		self.exception_string=''
 		## do environment validation
-#		if not path.isfile(self.__class__.__name__+'.py'):
-#			print('Please run %s from the directory where is resides.' % (self.__class__.__name__+'.py'))
-#			return
+		if not path.isfile(self.__class__.__name__+'.py'):
+			print('Please run %s from the directory where is resides.' % (self.__class__.__name__+'.py'))
+			return
 #		if not path.isdir(SETUP_SUBDIR):
 #			print 'Required directory %s does not exist. please check and run again.' % SETUP_SUBDIR
 #			return
 		if not path.isfile(CONFIG_FILE):
-			print('Config file %s does not exist. please check and run again.' % CONFIG_FILE)
+			print("File '%s' is not found in test4u root directory. please make sure you get the full package and start over." % CONFIG_FILE)
 			return
 		if not path.isdir(TC_SUBDIR):
-			print('Required directory %s does not exist. please check and run again.' % TC_SUBDIR)
+			print("Directory '%s' is not found in test4u root directory. It is used to store testcase files(*.t4u). Please check and start over." % TC_SUBDIR)
+			return
+		if not path.isdir(TS_SUBDIR):
+			print("Directory '%s' is not found in test4u root directory. It is used to store test suite files(*.ts). Please check and start over." % TC_SUBDIR)
 			return
 		if not path.isdir(SNAPSHOT_SUBDIR):
 			mkdir(SNAPSHOT_SUBDIR)

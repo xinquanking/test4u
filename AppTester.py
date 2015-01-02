@@ -143,8 +143,6 @@ class AppTester(Tester):
 #		self.__writeHtmlTestResult()
 
 
-    
-
 def main(argv):
     '''
     @param argv include:

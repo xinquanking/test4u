@@ -30,7 +30,6 @@ config = ConfigParser.ConfigParser()
 config.readfp(open(CONFIG_FILE))
 
 MAIL_SERVER_ADDRESS = config.get('MAIL', 'MAIL_SERVER_ADDRESS').strip()
-
 if MAIL_SERVER_ADDRESS.strip()=='':
     raise ValueError('MAIL_SERVER_ADDRESS is not properly configured!')
 MAIL_SENDER_ADDRESS = config.get('MAIL', 'SENDER_ADDRESS').strip()
@@ -55,7 +54,9 @@ APPLOG_FILE=config.get('APP', 'APPLOG_FILE').strip()
 
 DEFAULT_TEST_SUITE=config.get('TEST', 'DEFAULT_TEST_SUITE').strip()
 CRITICAL_TESTCASES=config.get('TEST', 'CRITICAL_TESTCASES').strip().split(',')
-
+THREAD_WAIT_INTERVAL = config.get('TEST', 'THREAD_WAIT_INTERVAL').strip()
+if not THREAD_WAIT_INTERVAL.strip().isDigit():
+    raise ValueError('THREAD_WAIT_INTERVAL is not properly configured!')
 #    return False
 UPGRADE_APP_ON_TEST_START=False
 LOG_LEVEL=logging.DEBUG     # control the current log level
