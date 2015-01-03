@@ -73,14 +73,17 @@ DEBUG    List of devices attached:
 ['014697590A01F00F']
 
 ```
-If you encounter other error, check your server setup first and contact me whenever necessary. I will be happy to help. Make sure you send me the full log output.
+If you encounter other error, check your server setup first and contact me whenever necessary. Make sure you send me the full log output so I can help.
 
 ## tester's guide
+With test4u, a tester is not required to be familiar with monkeyrunner APIs. The only prerequisit is basic python/jython programming abilities.
 ### start customizing test4u for your App and run your first automated test
-  * configure t4uenv.ini
-    * 
-  * implement necessary functions in AppTester.py
-  * add your own functions (optional)
+#### configure t4uenv.ini
+ * 
+#### organize your testcases and test suites
+  * 
+#### implement necessary functions in AppTester.py
+#### add your own functions (optional)
 
 ## developer's guide
 coming soon.
