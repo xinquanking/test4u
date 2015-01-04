@@ -7,7 +7,7 @@ import time
 import threading
 import copy
 
-from TestUtil import printLog, TestStatus, H_LINE, SNAPSHOT_SUBDIR
+from TestUtil import printLog, TestStatus, H_LINE, SNAPSHOT_SUBDIR, APPLOG_FILE
 from TestServer import TestServer
 from AndroidDevice import AndroidDevice
 
@@ -177,6 +177,7 @@ class TestEngine(AndroidDevice, threading.Thread):
             if self.testSuite.mutex.acquire(1):
                 testcase=self.testSuite.getTestCase()
                 self.testSuite.mutex.release()
-        printLog(self.threadName+"No testcase unexecuted, terminate.")
+        printLog(self.threadName+"No testcase unexecuted, backing up app log file...")
+        self.pullFile(APPLOG_FILE, 'applog_'+self.deviceId+'.txt')
 #        self.devicePool.releaseDevice(self.device.deviceId)
 
